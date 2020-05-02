@@ -28,6 +28,21 @@ typedef unsigned __int64 uint64_t;
 typedef struct websocket_parser websocket_parser;
 typedef struct websocket_parser_settings websocket_parser_settings;
 
+#ifdef __cplusplus
+// opcodes
+static int WS_OP_CONTINUE = 0x0;
+static int WS_OP_TEXT     = 0x1;
+static int WS_OP_BINARY   = 0x2;
+static int WS_OP_CLOSE    = 0x8;
+static int WS_OP_PING     = 0x9;
+static int WS_OP_PONG     = 0xA;
+
+// marks
+static int WS_FINAL_FRAME = 0x10;
+static int WS_HAS_MASK    = 0x20;
+
+typedef int websocket_flags;
+#else
 typedef enum websocket_flags {
     // opcodes
     WS_OP_CONTINUE = 0x0,
@@ -41,6 +56,7 @@ typedef enum websocket_flags {
     WS_FINAL_FRAME = 0x10,
     WS_HAS_MASK    = 0x20,
 } websocket_flags;
+#endif
 
 #define WS_OP_MASK 0xF
 #define WS_FIN     WS_FINAL_FRAME
